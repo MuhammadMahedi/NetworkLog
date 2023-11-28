@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">NetworkLog</string>
+    <string name="device_admin_description">this is device admin description</string>
+</resources>
