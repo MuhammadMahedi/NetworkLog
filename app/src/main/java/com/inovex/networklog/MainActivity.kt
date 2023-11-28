@@ -1,4 +1,4 @@
-package com.example.networklog
+package com.inovex.networklog
 
 import android.app.Activity
 import android.app.admin.DevicePolicyManager
@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import com.example.networklog.databinding.ActivityMainBinding
+import com.inovex.networklog.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding

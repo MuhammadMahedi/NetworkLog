@@ -1,4 +1,4 @@
-package com.example.networklog
+package com.inovex.networklog
 
 import android.app.admin.DeviceAdminReceiver
 import android.content.Context

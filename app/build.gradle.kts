@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.networklog"
+    namespace = "com.inovex.networklog"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.networklog"
+        applicationId = "com.inovex.networklog"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
