@@ -1,5 +1,6 @@
 package com.inovex.networklog
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.admin.DeviceAdminReceiver
 import android.app.admin.DeviceAdminReceiver.ACTION_NETWORK_LOGS_AVAILABLE
@@ -16,6 +17,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import com.inovex.networklog.DelAdminReceiver.Companion.ACTION_NETWORK_LOGS_AVAILABLEE
 import com.inovex.networklog.DelAdminReceiver.Companion.EXTRA_NETWORK_LOGS_BATCH_TOKEN
 import com.inovex.networklog.databinding.ActivityMainBinding
 import kotlin.properties.Delegates
@@ -25,8 +27,11 @@ class MainActivity : AppCompatActivity() {
     var batchToken = 0L
     private val batchTokenReceiver = object : BroadcastReceiver() {
 
+        @RequiresApi(Build.VERSION_CODES.Q)
         override fun onReceive(context: Context?, intent: Intent?) {
-            if (ACTION_NETWORK_LOGS_AVAILABLE == intent?.action) {
+            Toast.makeText(this@MainActivity, "Received Something", Toast.LENGTH_SHORT).show()
+            Log.d("batchTokenOnReceive", "Received Something")
+            if (ACTION_NETWORK_LOGS_AVAILABLEE == intent?.action) {
                 val token = intent.getLongExtra(EXTRA_NETWORK_LOGS_BATCH_TOKEN, 0) // 0 is the default value
                 // Use the batch token here
                 batchToken= token
@@ -34,6 +39,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
 
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,16 +56,8 @@ class MainActivity : AppCompatActivity() {
         devicePolicyManager?.setNetworkLoggingEnabled(null,true)
 
 
-
-
-       // val adminComponent = ComponentName(this, MyDeviceAdminReceiver::class.java)
-
-
-
-
-
-
-    //val deviceAdminReceiver= DeviceAdminReceiver()
+        // val adminComponent = ComponentName(this, MyDeviceAdminReceiver::class.java)
+        //val deviceAdminReceiver= DeviceAdminReceiver()
         //intent.getLongExtra("com.android.cts.deviceowner.extra.NETWORK_LOGS_BATCH_TOKEN")
 //        val d = deviceAdminReceiver.onNetworkLogsAvailable(this,intent,0L,100)
 
@@ -78,11 +76,8 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this@MainActivity, "No Device Policy Manager found", Toast.LENGTH_SHORT).show()
             }*/
 
-
             val isEnable = devicePolicyManager?.isNetworkLoggingEnabled(null)
             Toast.makeText(this@MainActivity, "$isEnable", Toast.LENGTH_SHORT).show()
-
-
 
         }
         binding.btnRetrieveLogs.setOnClickListener {
@@ -96,14 +91,18 @@ class MainActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this@MainActivity, "No Device Policy Manager found", Toast.LENGTH_SHORT).show()
             }*/
-
             //val initialBatchToken = -666L
 
+            //after update batchtoken will start with 0 but we cant retrei the logs bcz the batch token is not provided
+// we need to trigger the batch in the terminal with  "adb path shell dpm force-network-logs"
+            //this will trigger the batchToken and we will get 1 as batchtoken.
+            //then clicking the button it works
             Log.d("batchToken1", "$batchToken")
-            val initialLogs = devicePolicyManager?.retrieveNetworkLogs(null, batchToken)
+            val initialLogs = devicePolicyManager?.retrieveNetworkLogs(null, 1)
 
             Toast.makeText(this, "$initialLogs", Toast.LENGTH_SHORT).show()
-            Log.d("retrieveData", "$initialLogs")
+            Log.d("retrieveData", initialLogs.toString())
+            binding.tvShowLogs.text = initialLogs.toString()
            // val nextBatchToken = getNextBatchToken(initialLogs) // Logic to extract the next batch token
 
             /*if (nextBatchToken != 0L) {
@@ -132,16 +131,20 @@ class MainActivity : AppCompatActivity() {
     }*/
 
 
+    @SuppressLint("UnspecifiedRegisterReceiverFlag")
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onResume() {
         super.onResume()
-        val intentFilter = IntentFilter(ACTION_NETWORK_LOGS_AVAILABLE)
+        Log.d("status", "OnResume")
+        val intentFilter = IntentFilter(ACTION_NETWORK_LOGS_AVAILABLEE)
         registerReceiver(batchTokenReceiver, intentFilter)
     }
 
     override fun onPause() {
         super.onPause()
-        unregisterReceiver(batchTokenReceiver)
+        Log.d("status", "OnPause")
+        //unregisterReceiver(batchTokenReceiver)
     }
+
 
 }

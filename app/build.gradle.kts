@@ -11,8 +11,8 @@ android {
         applicationId = "com.inovex.networklog"
         minSdk = 24
         targetSdk = 34
-        versionCode = 11
-        versionName = "11.0"
+        versionCode = 17
+        versionName = "17.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

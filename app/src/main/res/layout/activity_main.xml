@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,20 +7,52 @@
     tools:context=".MainActivity"
     android:gravity="center">
 
-    <Button
-        android:id="@+id/btn_check_enabled"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/ll_buttons"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="CheckStatus"
-        android:layout_margin="10dp"
-         />
+        android:orientation="horizontal"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/btn_retrieve_logs"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Retrive Logs"
-        android:layout_margin="10dp"
-         />
+        <Button
+            android:id="@+id/btn_check_enabled"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="CheckStatus" />
 
-</LinearLayout>
+        <Button
+            android:id="@+id/btn_retrieve_logs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Retrive Logs" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_margin="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_buttons">
+
+        <TextView
+            android:id="@+id/tv_show_logs"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            tools:text="[DnsEvent(0, preprod-voilatile-pa.googleapis.com, , 0, 1701690942533, com.google.uid.shared:10124), DnsEvent(1, digitalassetlinks.googleapis.com, , 0, 1701690942535, com.google.uid.shared:10124), DnsEvent(2, preprod-voilatile-pa.googleapis.com, , 0, 1701690945094, com.google.uid.shared:10124), DnsEvent(3, digitalassetlinks.googleapis.com, , 0, 1701690945318, com.google.uid.shared:10124), DnsEvent(4, preprod-voilatile-pa.googleapis.com, , 0, 1701690948033, com.google.uid.shared:10124), DnsEvent(5, digitalassetlinks.googleapis.com, , 0, 1701690948048, com.google.uid.shared:10124), DnsEvent(6, connectivitycheck.gstatic.com, 74.125.24.94, 1, 1701690951840, android.uid.networkstack:1073), DnsEvent(7, www.googleapis.cn, 172.217.194.94, 1, 1701690951841, android.uid.networkstack:1073), DnsEvent(8, preprod-voilatile-pa.googleapis.com, 142.251.10.95 74.125.200.95 172.253.118.95 142.250.4.95 74.125.24.95 172.217.194.95 64.233.170.95 74.125.130.95 142.251.175.95 142.251.12.95, 11, 1701690951842, com.google.uid.shared:10124), DnsEvent(9, mtalk.google.com, 74.125.68.188, 1, 1701690951843, com.google.uid.shared:10124), ConnectEvent(10, ::ffff:74.125.68.188, 5228, 1701690951847, com.google.uid.shared:10124), DnsEvent(11, connectivitycheck.gstatic.com, 74.125.24.94, 1, 1701690951855, android.uid.networkstack:1073), DnsEvent(12, www.googleapis.cn, 172.217.194.94, 1, 1701690951856, android.uid.networkstack:1073), ConnectEvent(13, ::ffff:74.125.24.94, 443, 1701690951858, android.uid.networkstack:1073), ConnectEvent(14, ::ffff:172.217.194.94, 80, 1701690951858, android.uid.networkstack:1073), ConnectEvent(15, ::ffff:142.251.10.95, 443, 1701690951903, com.google.uid.shared:10124), DnsEvent(16, digitalassetlinks.googleapis.com, 64.233.170.95 142.251.175.95 142.251.12.95 142.251.10.95 172.253.118.95 172.217.194.95 74.125.68.95 74.125.130.95 74.125.200.95 74.125.24.95, 10, 1701690952001, com.google.uid.shared:10124), ConnectEvent(17, ::ffff:64.233.170.95, 443, 1701690952059, com.google.uid.shared:10124), DnsEvent(18, connectivitycheck.gstatic.com, 74.125.24.94, 1, 1701690952130, android.uid.networkstack:1073), DnsEvent(19, www.googleapis.cn, 172.217.194.94, 1, 1701690952133, android.uid.networkstack:1073), ConnectEvent(20, ::ffff:74.125.24.94, 443, 1701690952136, android.uid.networkstack:1073), ConnectEvent(21, ::ffff:172.217.194.94, 80, 1701690952144, android.uid.networkstack:1073), DnsEvent(22, connectivitycheck.gstatic.com, 74.125.24.94, 1, 1701690952383, android.uid.networkstack:1073), DnsEvent(23, www.googleapis.cn, 172.217.194.94, 1, 1701690952383, android.uid.networkstack:1073), ConnectEvent(24, ::ffff:74.125.24.94, 443, 1701690952391, android.uid.networkstack:1073), ConnectEvent(25, ::ffff:172.217.194.94, 80, 1701690952393, android.uid.networkstack:1073)]"
+            android:textSize="15sp"
+            android:inputType="textMultiLine"
+            />
+
+
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
